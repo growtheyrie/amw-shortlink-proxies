@@ -5,15 +5,14 @@ Deployed to Prefect Horizon — exposes Short.io analytics & link search to Clau
 """
 
 import os
-from fastmcp import FastMCP
-from fastmcp.client.transports import StreamableHttpTransport
+from fastmcp import FastMCP, Client
 
 SHORTIO_API_KEY = os.environ["SHORTIO_API_KEY"]
 SHORTIO_MCP_URL = "https://ai-assistant.short.io/mcp"
 
-transport = StreamableHttpTransport(
-    url=SHORTIO_MCP_URL,
+client = Client(
+    SHORTIO_MCP_URL,
     headers={"Authorization": SHORTIO_API_KEY},
 )
 
-mcp = FastMCP.as_proxy(transport, name="shortio_mcp")
+mcp = FastMCP.as_proxy(client, name="shortio_mcp")
