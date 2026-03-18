@@ -10,19 +10,18 @@ Linkly tools available:
 """
 
 import os
-from fastmcp import FastMCP
-from fastmcp.client.transports import StreamableHttpTransport
+from fastmcp import FastMCP, Client
 
 LINKLY_API_KEY = os.environ["LINKLY_API_KEY"]
 LINKLY_WORKSPACE_ID = os.environ.get("LINKLY_WORKSPACE_ID", "296177")
 LINKLY_MCP_URL = "https://mcp.linklyhq.com"
 
-transport = StreamableHttpTransport(
-    url=LINKLY_MCP_URL,
+client = Client(
+    LINKLY_MCP_URL,
     headers={
         "Authorization": f"Bearer {LINKLY_API_KEY}",
         "X-Workspace-ID": LINKLY_WORKSPACE_ID,
     },
 )
 
-mcp = FastMCP.as_proxy(transport, name="linkly_mcp")
+mcp = FastMCP.as_proxy(client, name="linkly_mcp")
