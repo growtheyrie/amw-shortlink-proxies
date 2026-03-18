@@ -5,7 +5,8 @@ Deployed to Prefect Horizon — exposes Short.io analytics & link search to Clau
 """
 
 import os
-from fastmcp import FastMCP, Client
+from fastmcp.server import create_proxy
+from fastmcp.client import Client
 from fastmcp.client.transports import StreamableHttpTransport
 
 SHORTIO_API_KEY = os.environ["SHORTIO_API_KEY"]
@@ -16,4 +17,4 @@ transport = StreamableHttpTransport(
     headers={"Authorization": SHORTIO_API_KEY},
 )
 
-mcp = FastMCP.as_proxy(Client(transport), name="shortio_mcp")
+mcp = create_proxy(Client(transport), name="shortio_mcp")
