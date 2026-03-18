@@ -13,7 +13,7 @@ SHORTIO_MCP_URL = "https://ai-assistant.short.io/mcp"
 
 transport = StreamableHttpTransport(
     url=SHORTIO_MCP_URL,
-    headers={"Authorization": f"Bearer {SHORTIO_API_KEY}"},
+    headers={"Authorization": SHORTIO_API_KEY},
 )
 
 mcp = FastMCP.as_proxy(transport, name="shortio_mcp")
