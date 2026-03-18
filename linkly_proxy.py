@@ -11,7 +11,6 @@ Linkly tools available:
 
 import os
 from fastmcp import FastMCP
-from fastmcp.server import create_proxy
 from fastmcp.client.transports import StreamableHttpTransport
 
 LINKLY_API_KEY = os.environ["LINKLY_API_KEY"]
@@ -26,7 +25,4 @@ transport = StreamableHttpTransport(
     },
 )
 
-mcp = create_proxy(
-    transport,
-    name="linkly_mcp",
-)
+mcp = FastMCP.as_proxy(transport, name="linkly_mcp")
